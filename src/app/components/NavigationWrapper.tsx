@@ -1,10 +1,11 @@
 // Button Wrapper:
-import { ComponentType } from "react";
+import { ComponentType, ReactElement } from "react";
+import { Button } from "./Button";
 
 interface ButtonWrapperProps {
   question: number;
   setQuestion: React.Dispatch<React.SetStateAction<number>>;
-  View: ComponentType<any>[];
+  View: ReactElement<any, string | React.JSXElementConstructor<any>>[]; // Use ReactElement type
 }
 
 export const NavigationWrapper = ({
@@ -22,12 +23,7 @@ export const NavigationWrapper = ({
   return (
     <div className="flex justify-evenly">
       {question > 0 ? (
-        <button
-          className="bg-orangey-yellow text-lighter-dark py-3 px-5 rounded-md font-bold  mx-2"
-          onClick={handlePrevButton}
-        >
-          &lt; Previous
-        </button>
+        <Button handleClick={handlePrevButton} text="&lt; Previous" />
       ) : null}
       {question < View.length - 1 ? (
         <button
