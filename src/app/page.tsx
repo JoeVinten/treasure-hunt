@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-dark text-cream h-full">
-      <div className="max-w-md">
+      <div className="max-w-md m-1">
         {Views[question]}
         <NavigationWrapper
           question={question}

@@ -12,7 +12,7 @@ export const Paragraph = ({ markdownText }: { markdownText: string }) => {
   };
 
   return (
-    <div className="bg-lighter-dark rounded-md my-3 p-4 font-mono leading-relaxed">
+    <div className="bg-lighter-dark rounded-md my-3 mx-2 p-4 font-mono leading-relaxed">
       <ReactMarkdown components={renderers} remarkPlugins={[supersub]}>
         {markdownText}
       </ReactMarkdown>
