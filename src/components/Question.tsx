@@ -1,4 +1,4 @@
-import { Paragraph } from "../components/Paragraph";
+import { Paragraph } from "./Paragraph";
 import { TextInput } from "./TextInput";
 
 interface QuestionProps {
