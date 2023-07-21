@@ -1,21 +1,9 @@
-import ReactMarkdown from "react-markdown";
-import supersub from "remark-supersub";
+import { MarkdownRenderer } from "./MarkdownRenderer";
 
-export const Paragraph = ({ markdownText }: { markdownText: string }) => {
-  const renderers = {
-    strong: ({ children }: { children: React.ReactNode }) => (
-      <strong style={{ color: "#E590A3" }}>{children}</strong>
-    ),
-    sup: ({ children }: { children: React.ReactNode }) => (
-      <sup style={{ color: "#F2BD4C" }}>{children}</sup>
-    ),
-  };
-
+export const Paragraph = ({ text }: { text: string }) => {
   return (
-    <div className="bg-lighter-dark rounded-md my-3 mx-2 p-4 font-mono leading-relaxed">
-      <ReactMarkdown components={renderers} remarkPlugins={[supersub]}>
-        {markdownText}
-      </ReactMarkdown>
+    <div className="bg-lighter-dark rounded-md my-3 mx-2 p-4 font-mono leading-relaxed break-words">
+      <MarkdownRenderer markdownText={text} />
     </div>
   );
 };

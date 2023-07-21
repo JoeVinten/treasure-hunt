@@ -1,20 +1,16 @@
-// Button Wrapper:
-import { ComponentType, ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import { Button } from "./Button";
+import { QuestionLocationContext } from "../App";
 
 interface ButtonWrapperProps {
-  question: number;
-  setQuestion: React.Dispatch<React.SetStateAction<number>>;
-  View: ReactElement<any, string | React.JSXElementConstructor<any>>[]; // Use ReactElement type
+  View: ReactElement<unknown, string | React.JSXElementConstructor<unknown>>[]; // Use ReactElement type
 }
 
-export const NavigationWrapper = ({
-  question,
-  setQuestion,
-  View,
-}: ButtonWrapperProps) => {
+export const NavigationWrapper = ({ View }: ButtonWrapperProps) => {
+  const { question, setQuestion } = useContext(QuestionLocationContext);
+
   const handleNextButton = () => {
-    question < View.length - 1 && setQuestion(question + 1);
+    question < View.length - 1 && setQuestion(Number(question) + 1);
   };
 
   const handlePrevButton = () => {

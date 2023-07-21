@@ -1,12 +1,13 @@
 interface ButtonProps {
   text: string;
   handleClick: () => void;
+  center?: boolean;
 }
 
 export const Button = ({ text, handleClick }: ButtonProps) => {
   return (
     <button
-      className="bg-orangey-yellow text-lighter-dark py-3 px-5 rounded-md font-bold  mx-2"
+      className="bg-orangey-yellow text-lighter-dark py-3 px-5 rounded-md font-bold  mx-2 my-0"
       onClick={handleClick}
     >
       {text}

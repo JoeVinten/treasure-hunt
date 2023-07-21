@@ -1,13 +1,13 @@
 import { Paragraph } from "../components/Paragraph";
-import { prologueText } from "../copy/prologue";
+import { instructions } from "../copy/instructions";
 
-export const Prologue = () => (
+export const Instructions = () => (
   <div className="flex justify-between flex-col">
     <h1 className="text-3xl font-bold text-center text-orangey-yellow">
-      Time Heist: <span className="italic">London&apos;s Legacy</span>
+      Instructions
     </h1>
     <div>
-      {prologueText.map((paragraph, index) => (
+      {instructions.map((paragraph, index) => (
         <Paragraph key={index} text={paragraph} />
       ))}
     </div>
