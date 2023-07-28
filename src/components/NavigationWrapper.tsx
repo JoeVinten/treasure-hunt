@@ -1,6 +1,5 @@
 import { ReactNode, useContext } from "react";
 import { Button } from "./Button";
-import { QuestionLocationContext } from "../App";
 
 interface ButtonWrapperProps {
   View: ReactNode[];

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Paragraph } from "../components/Paragraph";
-import { TextInput } from "../components/TextInput";
-import { Alert } from "../components/Alert";
+import { CrypticQuestion } from "./CrypticQuestion";
 import { GeoLocationCheck } from "./GeoLocationCheck";
+import { TimedAlert } from "../components/TimedAlert";
 
 interface QuestionProps {
   riddle: {
@@ -13,6 +13,7 @@ interface QuestionProps {
     latitude: number;
     longitude: number;
   };
+  onCorrectAnswer: () => void;
 }
 
 export const GEOLOCATIONSTATUS = {
@@ -21,61 +22,52 @@ export const GEOLOCATIONSTATUS = {
   FAILURE: "failure",
 };
 
-export const Question = ({ riddle }: QuestionProps) => {
+export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
   const [geoLocationMessage, setGeoLocationMessage] = useState("");
   const [geoLocationStatus, setGeoLocationStatus] = useState("");
 
-  useEffect(() => {
-    const setMessageAndReset = (message: string, resetStatus = false) => {
-      setGeoLocationMessage(message);
-      const timer = setTimeout(() => {
-        setGeoLocationMessage("");
-        if (resetStatus) {
-          setGeoLocationStatus("");
-        }
-      }, 3000);
-      return timer;
-    };
+  const showMessage = (message: string) => {
+    setGeoLocationMessage(message);
+  };
 
-    let timer: number;
+  useEffect(() => {
     if (geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS) {
-      timer = setMessageAndReset(
-        "**Congrats!** You found the correct location! 🎉"
-      );
+      showMessage("**Congrats!** You found the correct location! 🎉");
     } else if (geoLocationStatus === GEOLOCATIONSTATUS.FAILURE) {
-      timer = setMessageAndReset(
-        `You're _not quite_ in the right location keep trying! 🚶‍♀️`,
-        true
-      );
+      showMessage(`You're _not quite_ in the right location keep trying! 🚶‍♀️`);
     } else if (geoLocationStatus === GEOLOCATIONSTATUS.ERROR) {
-      timer = setMessageAndReset(
+      showMessage(
         `There was an error getting your location, please try again! Make sure you've enabled location services in your browser. 🌎`
       );
     }
-    return () => clearTimeout(timer);
   }, [geoLocationStatus]);
-
-  const showAlert = geoLocationMessage ? (
-    <Alert
-      text={geoLocationMessage}
-      type={
-        geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS ? "success" : "error"
-      }
-    />
-  ) : (
-    false
-  );
 
   return (
     <>
-      {showAlert}
+      {geoLocationMessage ? (
+        <TimedAlert
+          message={geoLocationMessage}
+          type={
+            geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS
+              ? "success"
+              : "error"
+          }
+          duration={3000}
+          clearAlert={() => setGeoLocationMessage("")}
+        />
+      ) : (
+        false
+      )}
       {geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS &&
-        !geoLocationMessage && (
-          <>
-            <Paragraph text={riddle.question} />
-            <TextInput expectedAnswer={riddle.answer} />
-          </>
-        )}
+      !geoLocationMessage ? (
+        <CrypticQuestion
+          question={riddle.question}
+          expectedAnswer={riddle.answer}
+          onCorrectAnswer={onCorrectAnswer}
+        />
+      ) : (
+        false
+      )}
       {geoLocationStatus !== GEOLOCATIONSTATUS.SUCCESS && (
         <>
           <Paragraph text={riddle.riddle} />

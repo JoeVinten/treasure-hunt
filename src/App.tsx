@@ -8,17 +8,27 @@ import { Instructions } from "./sections/Instruction";
 
 export function App() {
   const [viewNumber, setViewNumber] = useState(
-    Number(localStorage.getItem("view")) || 0
+    Number(localStorage.getItem("treasurehunt-view")) || 0
   );
 
   useEffect(() => {
-    localStorage.setItem("view", viewNumber.toString());
+    localStorage.setItem("treasurehunt-view", viewNumber.toString());
   }, [viewNumber]);
+
+  const incrementViewNumber = () => {
+    setViewNumber((viewNumber) => viewNumber + 1);
+  };
 
   const Views = [
     <Prologue key="prologue" />,
     <Instructions key="instructions" />,
-    ...riddles.map((riddle) => <Question key={riddle.id} riddle={riddle} />),
+    ...riddles.map((riddle) => (
+      <Question
+        key={riddle.id}
+        riddle={riddle}
+        onCorrectAnswer={incrementViewNumber}
+      />
+    )),
   ];
 
   return (
