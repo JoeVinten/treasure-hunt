@@ -7,15 +7,18 @@ interface GeoLocationProps {
   latitude: number;
   longitude: number;
   handleLocationCheck: React.Dispatch<React.SetStateAction<string>>;
+  geoLocationCheckStatus: string;
 }
 export const GeoLocationCheck = ({
   latitude,
   longitude,
+  geoLocationCheckStatus,
   handleLocationCheck,
 }: GeoLocationProps) => {
   const success = (pos: GeolocationPosition) => {
     const userLatitude = pos.coords.latitude;
     const userLongitude = pos.coords.longitude;
+    console.log(userLatitude, userLongitude);
 
     // Calculate the distance from the current position to the correct position
     const distanceFromCorrectLocation = calculateDistance(
@@ -49,6 +52,10 @@ export const GeoLocationCheck = ({
         <Button
           text="I'm here 📍"
           handleClick={handleGeoLocationButton}
+          disabled={
+            geoLocationCheckStatus === GEOLOCATIONSTATUS.SUCCESS ||
+            geoLocationCheckStatus === GEOLOCATIONSTATUS.FAILURE
+          }
           center
         />
       </div>

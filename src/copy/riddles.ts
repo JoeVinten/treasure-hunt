@@ -4,8 +4,8 @@ export const riddles = [
     riddle: `**Rise high** above the _common man's sight_, where **glass and steel** take their flight. A **giant among the city**, stands _tall and strong_, find me where **I belong**.`,
     question: "How many floors does the **Shard** have?",
     answer: `96`,
-    latitude: 51.45293808009721,
-    longitude: -0.15185597390534925,
+    latitude: 51.453054422007575,
+    longitude: -0.15199485108219676,
   },
   {
     id: 2,

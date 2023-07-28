@@ -26,49 +26,65 @@ export const Question = ({ riddle }: QuestionProps) => {
   const [geoLocationStatus, setGeoLocationStatus] = useState("");
 
   useEffect(() => {
+    const setMessageAndReset = (message: string, resetStatus = false) => {
+      setGeoLocationMessage(message);
+      const timer = setTimeout(() => {
+        setGeoLocationMessage("");
+        if (resetStatus) {
+          setGeoLocationStatus("");
+        }
+      }, 3000);
+      return timer;
+    };
+
+    let timer: number;
     if (geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS) {
-      setGeoLocationMessage("**Congrats!** You found the correct location! 🎉");
+      timer = setMessageAndReset(
+        "**Congrats!** You found the correct location! 🎉"
+      );
     } else if (geoLocationStatus === GEOLOCATIONSTATUS.FAILURE) {
-      setGeoLocationMessage(
-        `You're _not quite_ in the right location keep trying! 🚶‍♀️`
+      timer = setMessageAndReset(
+        `You're _not quite_ in the right location keep trying! 🚶‍♀️`,
+        true
       );
     } else if (geoLocationStatus === GEOLOCATIONSTATUS.ERROR) {
-      setGeoLocationMessage(
+      timer = setMessageAndReset(
         `There was an error getting your location, please try again! Make sure you've enabled location services in your browser. 🌎`
       );
     }
-    const timer = setTimeout(() => {
-      setGeoLocationMessage("");
-    }, 3000);
     return () => clearTimeout(timer);
   }, [geoLocationStatus]);
 
+  const showAlert = geoLocationMessage ? (
+    <Alert
+      text={geoLocationMessage}
+      type={
+        geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS ? "success" : "error"
+      }
+    />
+  ) : (
+    false
+  );
+
   return (
     <>
-      {geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS ? (
-        <>
-          {geoLocationMessage ? (
-            <Alert text={geoLocationMessage} type={"success"} />
-          ) : (
-            <>
-              <Paragraph text={riddle.question} />
-              {/* TODO: Need to make this check the correct answer */}
-              <TextInput name="answer" expectedAnswer={riddle.answer} />
-            </>
-          )}
-        </>
-      ) : (
+      {showAlert}
+      {geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS &&
+        !geoLocationMessage && (
+          <>
+            <Paragraph text={riddle.question} />
+            <TextInput expectedAnswer={riddle.answer} />
+          </>
+        )}
+      {geoLocationStatus !== GEOLOCATIONSTATUS.SUCCESS && (
         <>
           <Paragraph text={riddle.riddle} />
           <GeoLocationCheck
             longitude={riddle.longitude}
             latitude={riddle.latitude}
             handleLocationCheck={setGeoLocationStatus}
+            geoLocationCheckStatus={geoLocationStatus}
           />
-          {geoLocationStatus === GEOLOCATIONSTATUS.FAILURE &&
-          geoLocationMessage ? (
-            <Alert text={geoLocationMessage} type={"error"} />
-          ) : null}
         </>
       )}
     </>

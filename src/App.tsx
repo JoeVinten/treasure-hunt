@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Prologue } from "./sections/Prologue";
 import { NavigationWrapper } from "./components/NavigationWrapper";
 import { riddles } from "./copy/riddles";
@@ -6,21 +6,14 @@ import { Question } from "./sections/Question";
 import "./index.css";
 import { Instructions } from "./sections/Instruction";
 
-export const QuestionLocationContext = createContext({
-  question: Number(localStorage.getItem("question")) || 0,
-  setQuestion: (question: number) => {},
-});
-
-function QuestionLocationProvider({
-  children,
-}: {
-  children: (views: React.ReactNode[]) => React.ReactNode;
-}) {
-  const [question, setQuestion] = useState(0);
+export function App() {
+  const [viewNumber, setViewNumber] = useState(
+    Number(localStorage.getItem("view")) || 0
+  );
 
   useEffect(() => {
-    localStorage.setItem("question", question.toString());
-  }, [question]);
+    localStorage.setItem("view", viewNumber.toString());
+  }, [viewNumber]);
 
   const Views = [
     <Prologue key="prologue" />,
@@ -29,29 +22,15 @@ function QuestionLocationProvider({
   ];
 
   return (
-    <QuestionLocationContext.Provider value={{ question, setQuestion }}>
-      {children(Views)}
-    </QuestionLocationContext.Provider>
-  );
-}
-
-export function App() {
-  return (
-    <QuestionLocationProvider>
-      {(Views) => (
-        <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-dark text-cream">
-          <div className="max-w-md m-1">
-            <QuestionLocationContext.Consumer>
-              {({ question }) => (
-                <>
-                  {Views[question]}
-                  <NavigationWrapper View={Views} />
-                </>
-              )}
-            </QuestionLocationContext.Consumer>
-          </div>
-        </main>
-      )}
-    </QuestionLocationProvider>
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-dark text-cream">
+      <div className="max-w-md m-1">
+        {Views[viewNumber]}
+        <NavigationWrapper
+          View={Views}
+          viewNumber={viewNumber}
+          setViewNumber={setViewNumber}
+        />
+      </div>
+    </main>
   );
 }
