@@ -1,7 +1,7 @@
 import { Button } from "../components/Button";
+import { GEOLOCATIONSTATUS } from "../constants/shared";
 
 import { calculateDistance } from "../helpers/calculateDistanceBeween";
-import { GEOLOCATIONSTATUS } from "./Question";
 
 interface GeoLocationProps {
   latitude: number;

@@ -1,5 +1,5 @@
 import { Paragraph } from "../components/Paragraph";
-import { instructions } from "../copy/instructions";
+import { instructions } from "../copy/starterText";
 
 export const Instructions = () => (
   <div className="flex justify-between flex-col">

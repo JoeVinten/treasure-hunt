@@ -1,5 +1,5 @@
 import { Paragraph } from "../components/Paragraph";
-import { prologueText } from "../copy/prologue";
+import { prologueText } from "../copy/starterText";
 
 export const Prologue = () => (
   <div className="flex justify-between flex-col">
