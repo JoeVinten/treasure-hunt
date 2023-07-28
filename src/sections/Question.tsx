@@ -3,7 +3,7 @@ import { Paragraph } from "../components/Paragraph";
 import { CrypticQuestion } from "./CrypticQuestion";
 import { GeoLocationCheck } from "./GeoLocationCheck";
 import { TimedAlert } from "../components/TimedAlert";
-import { GEOLOCATIONSTATUS } from "../constants/shared";
+import { GEOLOCATIONSTATUS, timeoutDuration } from "../constants/shared";
 
 interface QuestionProps {
   riddle: {
@@ -39,20 +39,6 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
   // TODO: Refactor conditional rendering to use object and be cleaner
   return (
     <>
-      {geoLocationMessage ? (
-        <TimedAlert
-          message={geoLocationMessage}
-          type={
-            geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS
-              ? "success"
-              : "error"
-          }
-          duration={3000}
-          clearAlert={() => setGeoLocationMessage("")}
-        />
-      ) : (
-        false
-      )}
       {geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS &&
       !geoLocationMessage ? (
         <CrypticQuestion
@@ -73,6 +59,23 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
             geoLocationCheckStatus={geoLocationStatus}
           />
         </>
+      ) : (
+        false
+      )}
+      {geoLocationMessage ? (
+        <TimedAlert
+          message={geoLocationMessage}
+          type={
+            geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS
+              ? "success"
+              : "error"
+          }
+          duration={timeoutDuration}
+          clearAlert={() => {
+            setGeoLocationMessage("");
+            setGeoLocationStatus("");
+          }}
+        />
       ) : (
         false
       )}

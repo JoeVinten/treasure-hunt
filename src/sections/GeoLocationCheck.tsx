@@ -52,10 +52,7 @@ export const GeoLocationCheck = ({
         <Button
           text="I'm here 📍"
           handleClick={handleGeoLocationButton}
-          disabled={
-            geoLocationCheckStatus === GEOLOCATIONSTATUS.SUCCESS ||
-            geoLocationCheckStatus === GEOLOCATIONSTATUS.FAILURE
-          }
+          disabled={geoLocationCheckStatus === GEOLOCATIONSTATUS.SUCCESS}
           center
         />
       </div>

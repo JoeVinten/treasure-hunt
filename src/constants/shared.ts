@@ -3,3 +3,5 @@ export const GEOLOCATIONSTATUS = {
   ERROR: "error",
   FAILURE: "failure",
 };
+
+export const timeoutDuration = 3000;
