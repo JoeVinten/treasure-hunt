@@ -30,7 +30,10 @@ export const CrypticQuestion = ({
       setIsCorrect(isCorrect);
       if (isCorrect) {
         setMessage("Correct! Good job!");
-        setTimeout(onCorrectAnswer, timeoutDuration);
+        setTimeout(() => {
+          onCorrectAnswer();
+          setIsCorrect(null);
+        }, timeoutDuration);
       } else {
         setMessage("Incorrect, try again.");
       }

@@ -20,6 +20,7 @@ interface QuestionProps {
 export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
   const [geoLocationMessage, setGeoLocationMessage] = useState("");
   const [geoLocationStatus, setGeoLocationStatus] = useState("");
+  const [showCrypticQuestion, setShowCrypticQuestion] = useState(false);
 
   const showMessage = (message: string) => {
     setGeoLocationMessage(message);
@@ -39,17 +40,13 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
   // TODO: Refactor conditional rendering to use object and be cleaner
   return (
     <>
-      {geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS &&
-      !geoLocationMessage ? (
+      {showCrypticQuestion ? (
         <CrypticQuestion
           question={riddle.question}
           expectedAnswer={riddle.answer}
           onCorrectAnswer={onCorrectAnswer}
         />
       ) : (
-        false
-      )}
-      {geoLocationStatus !== GEOLOCATIONSTATUS.SUCCESS ? (
         <>
           <Paragraph text={riddle.riddle} />
           <GeoLocationCheck
@@ -59,8 +56,6 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
             geoLocationCheckStatus={geoLocationStatus}
           />
         </>
-      ) : (
-        false
       )}
       {geoLocationMessage ? (
         <TimedAlert
@@ -74,6 +69,7 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
           clearAlert={() => {
             setGeoLocationMessage("");
             setGeoLocationStatus("");
+            setShowCrypticQuestion(true);
           }}
         />
       ) : (

@@ -11,10 +11,10 @@ export const riddles = [
     id: 2,
     riddle: `A **feast of senses**, a _merchant's delight_, scents and sounds that **might incite**. Where fresh and old **beautifully unite**, find me in the day or under the _night light_.
     `,
-    answer: `borough market`,
+    answer: `96`,
     question: "How many floors does the **Shard** have?",
-    latitude: 51.5054,
-    longitude: -0.0904,
+    latitude: 51.453054422007575,
+    longitude: -0.15199485108219676,
   },
   {
     id: 3,
