@@ -5,19 +5,37 @@ import { riddles } from "./copy/riddles";
 import { Question } from "./sections/Question";
 import "./index.css";
 import { Instructions } from "./sections/Instruction";
+import { Cipher } from "./sections/Cipher";
 
 export function App() {
   const [viewNumber, setViewNumber] = useState(
     Number(localStorage.getItem("treasurehunt-view")) || 0
   );
 
+  const [completedRiddles, setCompletedRiddles] = useState(
+    new Set(
+      JSON.parse(
+        localStorage.getItem("treasurehunt-completed") || "[]"
+      ) as number[]
+    )
+  );
+
   useEffect(() => {
     localStorage.setItem("treasurehunt-view", viewNumber.toString());
-  }, [viewNumber]);
+    localStorage.setItem(
+      "treasurehunt-completed",
+      JSON.stringify(Array.from(completedRiddles))
+    );
+  }, [viewNumber, completedRiddles]);
 
-  const incrementViewNumber = () => {
+  const completeRiddle = (riddleId: number) => {
     setViewNumber((viewNumber) => viewNumber + 1);
+    setCompletedRiddles(
+      (completedRiddles) => new Set([...completedRiddles, riddleId])
+    );
   };
+
+  const shouldShowCipher = completedRiddles.size === riddles.length;
 
   const Views = [
     <Prologue key="prologue" />,
@@ -26,9 +44,10 @@ export function App() {
       <Question
         key={riddle.id}
         riddle={riddle}
-        onCorrectAnswer={incrementViewNumber}
+        onCorrectAnswer={completeRiddle}
       />
     )),
+    shouldShowCipher && <Cipher />,
   ];
 
   return (
@@ -36,9 +55,10 @@ export function App() {
       <div className="max-w-md m-1">
         {Views[viewNumber]}
         <NavigationWrapper
-          View={Views}
+          numberOfViews={Views.length}
           viewNumber={viewNumber}
           setViewNumber={setViewNumber}
+          completedRiddles={completedRiddles}
         />
       </div>
     </main>

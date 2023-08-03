@@ -14,7 +14,7 @@ interface QuestionProps {
     latitude: number;
     longitude: number;
   };
-  onCorrectAnswer: () => void;
+  onCorrectAnswer: (riddleId: number) => void;
 }
 
 export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
@@ -44,7 +44,7 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
         <CrypticQuestion
           question={riddle.question}
           expectedAnswer={riddle.answer}
-          onCorrectAnswer={onCorrectAnswer}
+          onCorrectAnswer={() => onCorrectAnswer(riddle.id)}
         />
       ) : (
         <>

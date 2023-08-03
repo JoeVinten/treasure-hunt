@@ -1,19 +1,21 @@
-import { ReactNode } from "react";
 import { Button } from "./Button";
+import { riddles } from "../copy/riddles";
 
 interface ButtonWrapperProps {
-  View: ReactNode[];
+  numberOfViews: number;
   viewNumber: number;
   setViewNumber: React.Dispatch<React.SetStateAction<number>>;
+  completedRiddles: Set<unknown>;
 }
 
 export const NavigationWrapper = ({
+  numberOfViews,
   viewNumber,
   setViewNumber,
-  View,
+  completedRiddles,
 }: ButtonWrapperProps) => {
   const handleNextButton = () => {
-    viewNumber < View.length - 1 && setViewNumber(Number(viewNumber) + 1);
+    viewNumber < numberOfViews - 1 && setViewNumber(Number(viewNumber) + 1);
   };
 
   const handlePrevButton = () => {
@@ -24,7 +26,9 @@ export const NavigationWrapper = ({
       {viewNumber > 0 ? (
         <Button handleClick={handlePrevButton} text="&lt; Previous" />
       ) : null}
-      {viewNumber < View.length - 1 ? (
+      {viewNumber < numberOfViews - 1 &&
+      (viewNumber < numberOfViews - 2 ||
+        completedRiddles.size === riddles.length) ? (
         <button
           className="bg-orangey-yellow text-lighter-dark py-3 px-5 rounded-md font-bold  mx-2"
           onClick={handleNextButton}

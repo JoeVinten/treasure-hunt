@@ -1,8 +1,8 @@
 import { useState, FormEvent } from "react";
 import { Button } from "../components/Button";
 import { TimedAlert } from "../components/TimedAlert";
-import { Paragraph } from "../components/Paragraph";
 import { timeoutDuration } from "../constants/shared";
+import { TextInput } from "../components/TextInput";
 
 interface TextInputProps {
   question: string;
@@ -48,18 +48,12 @@ export const CrypticQuestion = ({
       onSubmit={handleSubmit}
     >
       {!isCorrect ? (
-        <>
-          <label htmlFor="cryptic-answer">
-            <Paragraph text={question} />
-          </label>
-          <input
-            name="cryptic-answer"
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            type="text"
-            className="text-3xl font-bold text-center text-cream bg-lighter-dark"
-          />
-        </>
+        <TextInput
+          label={question}
+          value={answer}
+          onChange={setAnswer}
+          name="cryptic-answer"
+        />
       ) : (
         false
       )}
