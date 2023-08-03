@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Prologue } from "./sections/Prologue";
 import { NavigationWrapper } from "./components/NavigationWrapper";
 import { riddles } from "./copy/riddles";
@@ -6,34 +5,11 @@ import { Question } from "./sections/Question";
 import "./index.css";
 import { Instructions } from "./sections/Instruction";
 import { Cipher } from "./sections/Cipher";
+import { useRiddles } from "./hooks/useRiddles";
 
 export function App() {
-  const [viewNumber, setViewNumber] = useState(
-    Number(localStorage.getItem("treasurehunt-view")) || 0
-  );
-
-  const [completedRiddles, setCompletedRiddles] = useState(
-    new Set(
-      JSON.parse(
-        localStorage.getItem("treasurehunt-completed") || "[]"
-      ) as number[]
-    )
-  );
-
-  useEffect(() => {
-    localStorage.setItem("treasurehunt-view", viewNumber.toString());
-    localStorage.setItem(
-      "treasurehunt-completed",
-      JSON.stringify(Array.from(completedRiddles))
-    );
-  }, [viewNumber, completedRiddles]);
-
-  const completeRiddle = (riddleId: number) => {
-    setViewNumber((viewNumber) => viewNumber + 1);
-    setCompletedRiddles(
-      (completedRiddles) => new Set([...completedRiddles, riddleId])
-    );
-  };
+  const { viewNumber, setViewNumber, completedRiddles, completeRiddle } =
+    useRiddles();
 
   const shouldShowCipher = completedRiddles.size === riddles.length;
 
