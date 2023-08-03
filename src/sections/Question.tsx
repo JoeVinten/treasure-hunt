@@ -39,7 +39,7 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
       );
     }
   }, [geoLocationStatus]);
-  // TODO: Refactor conditional rendering to use object and be cleaner
+
   return (
     <>
       {showCrypticQuestion ? (
@@ -73,7 +73,9 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
           clearAlert={() => {
             setGeoLocationMessage("");
             setGeoLocationStatus("");
-            setShowCrypticQuestion(true);
+            setShowCrypticQuestion(
+              geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS ? true : false
+            );
           }}
         />
       ) : (
