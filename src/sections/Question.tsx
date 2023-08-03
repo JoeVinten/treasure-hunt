@@ -11,6 +11,7 @@ interface QuestionProps {
     riddle: string;
     question: string;
     answer: string;
+    hint: string;
     latitude: number;
     longitude: number;
   };
@@ -21,6 +22,7 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
   const [geoLocationMessage, setGeoLocationMessage] = useState("");
   const [geoLocationStatus, setGeoLocationStatus] = useState("");
   const [showCrypticQuestion, setShowCrypticQuestion] = useState(false);
+  const [hintCounter, setHintCounter] = useState(0);
 
   const showMessage = (message: string) => {
     setGeoLocationMessage(message);
@@ -49,10 +51,12 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
       ) : (
         <>
           <Paragraph text={riddle.riddle} />
+          {hintCounter >= 5 && <Paragraph text={riddle.hint} />}
           <GeoLocationCheck
             longitude={riddle.longitude}
             latitude={riddle.latitude}
             handleLocationCheck={setGeoLocationStatus}
+            incrementHintCounter={setHintCounter}
             geoLocationCheckStatus={geoLocationStatus}
           />
         </>

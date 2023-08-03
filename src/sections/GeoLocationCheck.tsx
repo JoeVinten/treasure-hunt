@@ -7,12 +7,14 @@ interface GeoLocationProps {
   latitude: number;
   longitude: number;
   handleLocationCheck: React.Dispatch<React.SetStateAction<string>>;
+  incrementHintCounter: React.Dispatch<React.SetStateAction<number>>;
   geoLocationCheckStatus: string;
 }
 export const GeoLocationCheck = ({
   latitude,
   longitude,
   geoLocationCheckStatus,
+  incrementHintCounter,
   handleLocationCheck,
 }: GeoLocationProps) => {
   const success = (pos: GeolocationPosition) => {
@@ -44,6 +46,7 @@ export const GeoLocationCheck = ({
 
   const handleGeoLocationButton = () => {
     navigator.geolocation.getCurrentPosition(success, error);
+    incrementHintCounter((prevState) => prevState + 1);
   };
 
   return (
