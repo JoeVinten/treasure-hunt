@@ -32,7 +32,6 @@ export function App() {
     <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-dark text-cream">
       <div className="max-w-md m-1">
         {Views[viewNumber]}
-        <Cipher />
         <NavigationWrapper
           numberOfViews={Views.length}
           viewNumber={viewNumber}
