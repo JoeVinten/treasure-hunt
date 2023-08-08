@@ -8,7 +8,7 @@ interface TextInputProps {
 }
 
 export const TextInput = ({ label, value, onChange, name }: TextInputProps) => (
-  <>
+  <div className="max-w-full">
     <label htmlFor={name}>
       <Paragraph text={label} />
     </label>
@@ -17,7 +17,7 @@ export const TextInput = ({ label, value, onChange, name }: TextInputProps) => (
       value={value}
       onChange={(e) => onChange(e.target.value)}
       type="text"
-      className="text-3xl font-bold text-center text-cream bg-lighter-dark"
+      className="text-3xl font-bold text-center text-cream bg-lighter-dark max-w-full	"
     />
-  </>
+  </div>
 );

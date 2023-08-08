@@ -47,16 +47,13 @@ export const CrypticQuestion = ({
       className="flex justify-between flex-col p-4 max-w-md"
       onSubmit={handleSubmit}
     >
-      {!isCorrect ? (
-        <TextInput
-          label={question}
-          value={answer}
-          onChange={setAnswer}
-          name="cryptic-answer"
-        />
-      ) : (
-        false
-      )}
+      {/* {!isCorrect ? ( */}
+      <TextInput
+        label={question}
+        value={answer}
+        onChange={setAnswer}
+        name="cryptic-answer"
+      />
 
       {displayAlert && (
         <TimedAlert

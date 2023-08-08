@@ -44,6 +44,11 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
 
   return (
     <>
+      <CrypticQuestion
+        question={riddle.question}
+        expectedAnswer={riddle.answer}
+        onCorrectAnswer={() => onCorrectAnswer(riddle.id)}
+      />
       {showCrypticQuestion ? (
         <CrypticQuestion
           question={riddle.question}

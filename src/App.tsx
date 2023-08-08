@@ -39,6 +39,7 @@ export function App() {
           completedRiddles={completedRiddles}
         />
       </div>
+      <Cipher />
     </main>
   );
 }
