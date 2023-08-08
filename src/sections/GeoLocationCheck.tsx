@@ -20,7 +20,6 @@ export const GeoLocationCheck = ({
   const success = (pos: GeolocationPosition) => {
     const userLatitude = pos.coords.latitude;
     const userLongitude = pos.coords.longitude;
-    console.log(userLatitude, userLongitude);
 
     // Calculate the distance from the current position to the correct position
     const distanceFromCorrectLocation = calculateDistance(
@@ -31,7 +30,7 @@ export const GeoLocationCheck = ({
     );
 
     // Compare with correct location
-    if (distanceFromCorrectLocation <= 100) {
+    if (distanceFromCorrectLocation <= 200) {
       // 100 meters
       handleLocationCheck(GEOLOCATIONSTATUS.SUCCESS);
     } else {
