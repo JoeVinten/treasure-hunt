@@ -4,6 +4,7 @@ import { CrypticQuestion } from "./CrypticQuestion";
 import { GeoLocationCheck } from "./GeoLocationCheck";
 import { TimedAlert } from "../components/TimedAlert";
 import { GEOLOCATIONSTATUS, timeoutDuration } from "../constants/shared";
+import { TextInput } from "../components/TextInput";
 
 interface QuestionProps {
   riddle: {
@@ -12,6 +13,7 @@ interface QuestionProps {
     question: string;
     answer: string;
     hint: string;
+    riddleAnswer: string;
     latitude: number;
     longitude: number;
   };

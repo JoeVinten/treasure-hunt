@@ -31,7 +31,7 @@ export const GeoLocationCheck = ({
 
     // Compare with correct location
     if (distanceFromCorrectLocation <= 200) {
-      // 100 meters
+      // 200 meters
       handleLocationCheck(GEOLOCATIONSTATUS.SUCCESS);
     } else {
       handleLocationCheck(GEOLOCATIONSTATUS.FAILURE);
