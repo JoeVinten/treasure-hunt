@@ -6,8 +6,8 @@ export const riddles = [
     answer: `96`,
     hint: `The big pointy thing!`,
     riddleAnswer: "shard",
-    latitude: 51.50126,
-    longitude: -0.09951,
+    latitude: 51.505192,
+    longitude: -0.08782,
   },
   {
     id: 2,
@@ -16,8 +16,8 @@ export const riddles = [
     answer: `1851`,
     hint: `Delicious food and drink!`,
     riddleAnswer: "borough",
-    latitude: 51.50126,
-    longitude: -0.09951,
+    latitude: 51.505444,
+    longitude: -0.091249,
   },
   {
     id: 3,
@@ -26,8 +26,8 @@ export const riddles = [
     answer: `1938`,
     hint: `A big boat!`,
     riddleAnswer: "belfast",
-    latitude: 51.50126,
-    longitude: -0.09951,
+    latitude: 51.506579,
+    longitude: -0.081389,
   },
   {
     id: 4,
@@ -37,8 +37,8 @@ export const riddles = [
     answer: `1897`,
     hint: `A big church!`,
     riddleAnswer: "southwark",
-    latitude: 51.50126,
-    longitude: -0.09951,
+    latitude: 51.506132,
+    longitude: -0.090062,
   },
   {
     id: 5,
@@ -48,8 +48,8 @@ export const riddles = [
     answer: `1997`,
     hint: `To be or not to be`,
     riddleAnswer: "globe",
-    latitude: 51.50126,
-    longitude: -0.09951,
+    latitude: 51.508021,
+    longitude: -0.097074,
   },
 ];
 
@@ -58,7 +58,7 @@ export const cipher = {
   task: `We’re on a quest to find the **nine-letter word** which symbolises _freedom_ and _unorthodoxy_. We can use the answers from our previous parts to beat the **Time Thief**.  
   To solve this we need to add the numbers from each item together and then subtract a specific number outlined here:   
 
-  **Q1: -3. Q2: -9. Q3: -19. Q4: -20, and Q5: -8**  
+  **Q1: -3. Q2: -6. Q3: -19. Q4: -20, and Q5: -8**  
 
   So for example question 1 will be 9 + 6 and then -3. This corresponds to the alphabet and will give us the first few letter of our mystery word.  
   For the last part take out **TIME**, and switch out one of the letters.`,
