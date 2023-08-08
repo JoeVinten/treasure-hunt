@@ -6,8 +6,8 @@ export const riddles = [
     answer: `96`,
     hint: `The big pointy thing!`,
     riddleAnswer: "shard",
-    latitude: 51.505192,
-    longitude: -0.08782,
+    latitude: 51.50126,
+    longitude: -0.09951,
   },
   {
     id: 2,
@@ -16,8 +16,8 @@ export const riddles = [
     answer: `1851`,
     hint: `Delicious food and drink!`,
     riddleAnswer: "borough",
-    latitude: 51.505444,
-    longitude: -0.091249,
+    latitude: 51.50126,
+    longitude: -0.09951,
   },
   {
     id: 3,
@@ -26,8 +26,8 @@ export const riddles = [
     answer: `1938`,
     hint: `A big boat!`,
     riddleAnswer: "belfast",
-    latitude: 51.506579,
-    longitude: -0.081389,
+    latitude: 51.50126,
+    longitude: -0.09951,
   },
   {
     id: 4,
@@ -37,8 +37,8 @@ export const riddles = [
     answer: `1897`,
     hint: `A big church!`,
     riddleAnswer: "southwark",
-    latitude: 51.506132,
-    longitude: -0.090062,
+    latitude: 51.50126,
+    longitude: -0.09951,
   },
   {
     id: 5,
@@ -48,8 +48,8 @@ export const riddles = [
     answer: `1997`,
     hint: `To be or not to be`,
     riddleAnswer: "globe",
-    latitude: 51.508021,
-    longitude: -0.097074,
+    latitude: 51.50126,
+    longitude: -0.09951,
   },
 ];
 
