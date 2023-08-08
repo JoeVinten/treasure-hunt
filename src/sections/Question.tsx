@@ -4,7 +4,6 @@ import { CrypticQuestion } from "./CrypticQuestion";
 import { GeoLocationCheck } from "./GeoLocationCheck";
 import { TimedAlert } from "../components/TimedAlert";
 import { GEOLOCATIONSTATUS, timeoutDuration } from "../constants/shared";
-import { TextInput } from "../components/TextInput";
 
 interface QuestionProps {
   riddle: {
@@ -18,9 +17,14 @@ interface QuestionProps {
     longitude: number;
   };
   onCorrectAnswer: (riddleId: number) => void;
+  setShouldDisableNav: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
+export const Question = ({
+  riddle,
+  onCorrectAnswer,
+  setShouldDisableNav,
+}: QuestionProps) => {
   const [geoLocationMessage, setGeoLocationMessage] = useState("");
   const [geoLocationStatus, setGeoLocationStatus] = useState("");
   const [showCrypticQuestion, setShowCrypticQuestion] = useState(false);
@@ -31,6 +35,10 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
   };
 
   useEffect(() => {
+    if (geoLocationStatus) setShouldDisableNav(true);
+    const timer = setTimeout(() => {
+      setShouldDisableNav(false);
+    }, timeoutDuration);
     if (geoLocationStatus === GEOLOCATIONSTATUS.SUCCESS) {
       showMessage("**Congrats!** You found the correct location! 🎉");
     } else if (geoLocationStatus === GEOLOCATIONSTATUS.FAILURE) {
@@ -40,7 +48,8 @@ export const Question = ({ riddle, onCorrectAnswer }: QuestionProps) => {
         `There was an error getting your location, please try again! Make sure you've enabled location services in your browser. 🌎`
       );
     }
-  }, [geoLocationStatus]);
+    return () => clearTimeout(timer);
+  }, [geoLocationStatus, setShouldDisableNav]);
 
   return (
     <>

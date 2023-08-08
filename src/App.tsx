@@ -12,6 +12,8 @@ export function App() {
   const { viewNumber, setViewNumber, completedRiddles, completeRiddle } =
     useRiddles();
 
+  const [shouldDisableNav, setShouldDisableNav] = useState(false);
+
   const Views = useMemo(
     () => [
       <Prologue key="prologue" />,
@@ -21,6 +23,7 @@ export function App() {
           key={riddle.id}
           riddle={riddle}
           onCorrectAnswer={completeRiddle}
+          setShouldDisableNav={setShouldDisableNav}
         />
       )),
       completedRiddles.size === riddles.length && <Cipher />,
@@ -37,6 +40,7 @@ export function App() {
           viewNumber={viewNumber}
           setViewNumber={setViewNumber}
           completedRiddles={completedRiddles}
+          shouldDisableNav={shouldDisableNav}
         />
       </div>
     </main>
