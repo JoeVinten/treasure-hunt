@@ -32,7 +32,7 @@ export const Cipher = () => {
         onSubmit={handleSubmit}
       >
         <TextInput
-          label="Input your answer"
+          label="Input your answer below: "
           value={answer}
           onChange={(value) => setAnswer(value)}
           name="cipher-answer"

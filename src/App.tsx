@@ -6,7 +6,7 @@ import "./index.css";
 import { Instructions } from "./sections/Instruction";
 import { Cipher } from "./sections/Cipher";
 import { useRiddles } from "./hooks/useRiddles";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export function App() {
   const { viewNumber, setViewNumber, completedRiddles, completeRiddle } =
@@ -39,7 +39,6 @@ export function App() {
           completedRiddles={completedRiddles}
         />
       </div>
-      <Cipher />
     </main>
   );
 }
